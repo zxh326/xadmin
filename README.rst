@@ -6,13 +6,10 @@ Xadmin |Build Status|
 
 Drop-in replacement of Django admin comes with lots of goodies, fully extensible with plugin support, pretty UI based on Twitter Bootstrap.
 
-Live Demo
----------
-
-http://demo.xadmin.io
-
--  User: admin
--  Password: admin
+说明
+-------- 
+- 此分支是由个人独立出来的Django2.0 分支，同步更新
+- 默认分支为django2 分支。
 
 Features
 --------
