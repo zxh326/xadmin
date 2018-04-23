@@ -17,6 +17,7 @@ from django.forms import Media
 from django.utils.translation import get_language
 from django.contrib.admin.utils import label_for_field, help_text_for_field
 from django import VERSION as version
+import urllib
 import datetime
 import decimal
 
@@ -131,12 +132,12 @@ def quote(s):
     cls_str = str if six.PY3 else basestring
     if not isinstance(s, cls_str):
         return s
-    res = list(s)
-    for i in range(len(res)):
-        c = res[i]
-        if c in """:/_#?;@&=+$,"<>%\\""":
-            res[i] = '_%02X' % ord(c)
-    return ''.join(res)
+    # res = list(s)
+    # for i in range(len(res)):
+    #     c = res[i]
+    #     if c in """:/_#?;@&=+$,"<>%\\""":
+    #         res[i] = '_%02X' % ord(c)
+    return urllib.parse.quote(s)
 
 
 def unquote(s):
@@ -146,21 +147,21 @@ def unquote(s):
     cls_str = str if six.PY3 else basestring
     if not isinstance(s, cls_str):
         return s
-    mychr = chr
-    myatoi = int
-    list = s.split('_')
-    res = [list[0]]
-    myappend = res.append
-    del list[0]
-    for item in list:
-        if item[1:2]:
-            try:
-                myappend(mychr(myatoi(item[:2], 16)) + item[2:])
-            except ValueError:
-                myappend('_' + item)
-        else:
-            myappend('_' + item)
-    return "".join(res)
+    # mychr = chr
+    # myatoi = int
+    # list = s.split('_')
+    # res = [list[0]]
+    # myappend = res.append
+    # del list[0]
+    # for item in list:
+    #     if item[1:2]:
+    #         try:
+    #             myappend(mychr(myatoi(item[:2], 16)) + item[2:])
+    #         except ValueError:
+    #             myappend('_' + item)
+    #     else:
+    #         myappend('_' + item)
+    return urllib.parse.unquote(s)
 
 
 def flatten_fieldsets(fieldsets):
