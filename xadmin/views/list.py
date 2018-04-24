@@ -72,7 +72,7 @@ class ResultItem(object):
         if force_text(text) == '':
             text = mark_safe('&nbsp;')
         for wrap in self.wraps:
-            text = mark_safe(wrap % text)
+            text = mark_safe(wrap.format(text))
         return text
 
     @property
@@ -578,7 +578,7 @@ class ListAdminView(ModelAdminView):
                                       % (item_res_uri, edit_url, _(u'Details of %s') % str(obj)))
             else:
                 url = self.url_for_result(obj)
-                item.wraps.append(u'<a href="%s">%%s</a>' % url)
+                item.wraps.append(u'<a href="%s">{text}</a>' % url)
 
         return item
 
